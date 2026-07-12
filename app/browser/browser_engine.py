@@ -47,6 +47,13 @@ class BrowserEngine:
 
         return self.page.url
     
+    async def get_html(self):
+        """To get the HTML content of the current web page"""
+
+        html = await self.page.content()
+
+        return html
+    
     async def take_screenshot(self, filename: str):
         """ To capture a screenshot of the current page"""
 

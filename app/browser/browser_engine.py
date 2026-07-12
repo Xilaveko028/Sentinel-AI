@@ -1,7 +1,7 @@
 from playwright.async_api import async_playwright
 
 class BrowserEngine:
-    """ The task iof this class is to handle the following browser interactions for sentinel AI:
+    """ The task of this class is to handle the following browser interactions for sentinel AI:
     - launch a browser
     - navigate around pages
     -capture screenshots
@@ -34,13 +34,25 @@ class BrowserEngine:
 
         await self.page.goto(url)
 
-        print(f"Visted the URL: {url} ")
+        print(f"Visited the URL: {url} ")
 
     async def get_title(self):
         """To retrieve title information about the visited website"""
         title = await self.page.title()
-        
+
         return title
+    
+    async def get_current_url(self):
+        """To get the current URL of the curent web page """
+
+        return self.page.url
+    
+    async def take_screenshot(self, filename: str):
+        """ To capture a screenshot of the current page"""
+
+        path = f"assets/bug_screenshots/{filename}"
+        await self.page.screenshot(path=path)
+        print(f"Screenshot has been saved to:{path}") 
      
     async def close(self):
         """To close the browser and stop playwright"""

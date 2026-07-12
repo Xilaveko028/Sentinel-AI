@@ -8,6 +8,8 @@ async def main():
     await browser.launch(headless=True)
 
     await browser.visit("https://chatgpt.com")
+    title = await browser.get_title()
+    print(f"Page title is: {title}")
 
     await browser.close()
 

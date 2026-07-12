@@ -36,6 +36,12 @@ class BrowserEngine:
 
         print(f"Visted the URL: {url} ")
 
+    async def get_title(self):
+        """To retrieve title information about the visited website"""
+        title = await self.page.title()
+        
+        return title
+     
     async def close(self):
         """To close the browser and stop playwright"""
 

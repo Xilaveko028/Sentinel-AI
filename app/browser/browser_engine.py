@@ -29,6 +29,13 @@ class BrowserEngine:
 
         print(" Browser launched successfully!!!")
 
+    async def visit(self, url: str): # Reminder that url should be a string and website address to visit.
+        """ To navigate the browser and visit the desired URL """
+
+        await self.page.goto(url)
+
+        print(f"Visted the URL: {url} ")
+
     async def close(self):
         """To close the browser and stop playwright"""
 

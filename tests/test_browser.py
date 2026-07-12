@@ -7,6 +7,8 @@ async def main():
 
     await browser.launch(headless=True)
 
+    await browser.visit("https://chatgpt.com")
+
     await browser.close()
 
 if __name__ == "__main__":

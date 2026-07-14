@@ -12,15 +12,29 @@ class ObservationEngine:
         observation = []
 
         if self.analysis["forms"] > 0:
-            observation.append("Forms detected!!")
+            observation.append("This web page contains a form!!")
 
         if self.analysis["inputs"] > 0:
-            observation.append(f"Inputs detected: {self.analysis['inputs']}")
-        
-        if self.analysis["links"] > 0:
-            observation.append(f"Links detected: {self.analysis['links']}")
-        
-        if self.analysis["buttons"] > 0:
-            observation.append(f"Buttons detected: {self.analysis['buttons']}")
+            observation.append(f"This web page contains {self.analysis['inputs']} input fields.")
 
+        if self.analysis["forms"] > 0 and self.analysis["inputs"] > 0:
+            observation.append("The page appears to accept a user input through one or more forms.")
+
+        if self.analysis["links"] > 0:
+            observation.append(f"This web page contains {self.analysis['links']} links.")
+
+        if self.analysis["buttons"] > 0:
+            observation.append(f"This web page contains {self.analysis['buttons']} buttons.")
+
+        if self.analysis["buttons"] == 0:
+            observation.append("No buttons were detected.")
+
+        if self.analysis["buttons"] > 0 and self.analysis["links"] > 5:
+            observation.append(
+                "The page provides multiple navigation and interaction options."
+            )
+        if self.analysis["forms"] == 0 and self.analysis["inputs"] == 0:
+            observation.append(
+                "The page appears to be informational rather than intended for data entry."
+            )
         return observation

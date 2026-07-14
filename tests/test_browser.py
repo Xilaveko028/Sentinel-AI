@@ -2,6 +2,8 @@ import asyncio
 
 from app.browser.browser_engine import BrowserEngine
 from app.analysers.dom_analyser import DOMAnalyser
+from app.observation.observer import ObservationEngine
+from app.detectors.bug_detector import BugDetector
 
 async def main():
     """ To launch a browser """
@@ -24,6 +26,12 @@ async def main():
     analyser = DOMAnalyser(html)
     analysis = analyser.analyse()
 
+    observation_engine = ObservationEngine(analysis)
+    observations = observation_engine.generate()
+
+    bug_detector = BugDetector(analysis)
+    bugs = bug_detector.detect()
+
     print("\n========== PAGE INFORMATION ================")
     print(f"Page title is: {title}")
     print(f"Current URL: {current_url}")
@@ -40,6 +48,14 @@ async def main():
 
     print("===================================\n")
 
+
+    print("\n========== BUG DETECTION ==========")
+    if bugs:
+        for bug in bugs:
+            print(f"- {bug}")
+    else:
+        print("No potential usability or UI issues detected.")
+    print("===================================\n")  
     """ To close the browser after being used"""
     await browser.close()
 
